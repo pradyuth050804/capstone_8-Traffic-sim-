@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Urban Mobility Design System - Smart City Theme */
+
+@layer base {
+  :root {
+    /* Core Colors - Urban Mobility Palette */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Deep Navy - Professional Tech */
+    --primary: 213 50% 20%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Slate - Supporting UI */
+    --secondary: 210 15% 93%;
+    --secondary-foreground: 215 25% 25%;
+
+    /* Muted Surfaces */
+    --muted: 210 15% 95%;
+    --muted-foreground: 215 15% 45%;
+
+    /* Teal - Urban Sustainability */
+    --accent: 172 66% 35%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Traffic Signal Red */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Amber - Traffic Highlights */
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+
+    /* Success - Green Flow */
+    --success: 142 71% 35%;
+    --success-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 214 20% 88%;
+    --input: 214 20% 88%;
+    --ring: 213 50% 20%;
+
+    --radius: 0.625rem;
+
+    /* Map & Simulation Colors */
+    --map-road: 215 25% 35%;
+    --map-road-highlight: 172 66% 40%;
+    --map-water: 199 89% 70%;
+    --map-land: 120 25% 95%;
+    --traffic-low: 142 71% 45%;
+    --traffic-medium: 38 92% 50%;
+    --traffic-high: 0 72% 51%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(213 50% 20%) 0%, hsl(213 50% 30%) 50%, hsl(172 66% 35%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 15% 98%) 100%);
+    --gradient-simulation: linear-gradient(135deg, hsl(210 20% 98%) 0%, hsl(199 89% 95%) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(215 25% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(215 25% 15% / 0.08), 0 2px 4px -2px hsl(215 25% 15% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(215 25% 15% / 0.08), 0 4px 6px -4px hsl(215 25% 15% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(215 25% 15% / 0.1), 0 8px 10px -6px hsl(215 25% 15% / 0.08);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 215 25% 25%;
+    --sidebar-primary: 213 50% 20%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 15% 95%;
+    --sidebar-accent-foreground: 215 25% 25%;
+    --sidebar-border: 214 20% 92%;
+    --sidebar-ring: 213 50% 20%;
+  }
+
+  .dark {
+    --background: 215 25% 8%;
+    --foreground: 210 20% 95%;
+
+    --card: 215 25% 12%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 215 25% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 172 66% 45%;
+    --primary-foreground: 215 25% 8%;
+
+    --secondary: 215 20% 18%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 215 20% 16%;
+    --muted-foreground: 215 15% 60%;
+
+    --accent: 172 66% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+
+    --success: 142 71% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 172 66% 45%;
+
+    --map-road: 215 15% 50%;
+    --map-road-highlight: 172 66% 50%;
+    --map-water: 199 70% 35%;
+    --map-land: 215 20% 15%;
+    --traffic-low: 142 71% 50%;
+    --traffic-medium: 38 92% 55%;
+    --traffic-high: 0 62% 55%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(215 25% 8%) 0%, hsl(215 25% 15%) 50%, hsl(172 66% 25%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(215 25% 12%) 0%, hsl(215 25% 10%) 100%);
+    --gradient-simulation: linear-gradient(135deg, hsl(215 25% 8%) 0%, hsl(215 25% 12%) 100%);
+
+    --sidebar-background: 215 25% 10%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 172 66% 45%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 215 20% 15%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 215 20% 18%;
+    --sidebar-ring: 172 66% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Glass Effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  /* Map Container */
+  .map-container {
+    @apply relative overflow-hidden rounded-lg;
+    background: var(--gradient-simulation);
+  }
+
+  /* Metric Card */
+  .metric-card {
+    @apply bg-card rounded-xl p-4 border border-border;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Control Panel */
+  .control-panel {
+    @apply bg-card rounded-xl p-5 border border-border;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Traffic Indicator */
+  .traffic-indicator {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .traffic-low {
+    @apply bg-success/15 text-success;
+  }
+
+  .traffic-medium {
+    @apply bg-warning/15 text-warning;
+  }
+
+  .traffic-high {
+    @apply bg-destructive/15 text-destructive;
+  }
+}
+
+@layer utilities {
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-transform duration-200 hover:-translate-y-0.5;
+  }
+
+  /* Subtle pulse for live indicators */
+  .pulse-live {
+    animation: pulse-live 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
+  }
+}
+
+/* Custom Keyframes */
+@keyframes pulse-live {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes flow-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes vehicle-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation classes */
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out forwards;
+}
+
+.animate-flow-right {
+  animation: flow-right 3s linear infinite;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 100ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 500ms; }
