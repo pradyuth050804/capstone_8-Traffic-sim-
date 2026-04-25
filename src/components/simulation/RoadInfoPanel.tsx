@@ -1,11 +1,19 @@
 import { MapPin, Route as RouteIcon, Layers, GitBranch } from "lucide-react";
+import { SimulationConfig } from "@/pages/Simulation";
+import { YELAHANKA_ROADS } from "@/lib/trafficApi";
 
-const RoadInfoPanel = () => {
+interface RoadInfoPanelProps {
+  config?: SimulationConfig;
+}
+
+const RoadInfoPanel = ({ config }: RoadInfoPanelProps) => {
+  const activeRoad = YELAHANKA_ROADS.find(r => r.road_id === config?.selectedRoute) || YELAHANKA_ROADS[0];
+  
   const roadStats = {
-    totalLength: "4.2 km",
-    intersections: 5,
-    roadTypes: 3,
-    lanes: "2-4",
+    totalLength: `${(activeRoad.distance / 1000).toFixed(1)} km`,
+    intersections: activeRoad.distance > 10000 ? 12 : activeRoad.distance > 4000 ? 5 : 2,
+    roadTypes: activeRoad.distance > 8000 ? 5 : 3,
+    lanes: activeRoad.distance > 20000 ? "4-6" : "2-4",
   };
 
   return (

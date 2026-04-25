@@ -1,21 +1,21 @@
 interface TrafficHeatmapProps {
   fullSize?: boolean;
+  segments: string[];
+  intensityData: number[][];
 }
 
-const TrafficHeatmap = ({ fullSize = false }: TrafficHeatmapProps) => {
+const TrafficHeatmap = ({ fullSize = false, segments, intensityData }: TrafficHeatmapProps) => {
   // Generate heatmap data
   const hours = Array.from({ length: 16 }, (_, i) => `${i + 6}:00`);
-  const segments = ["MG Road", "Brigade Rd", "Residency Rd", "Richmond Rd", "St Marks Rd", "Cunningham Rd"];
-  
-  // Traffic intensity data (0-100)
-  const intensityData = [
-    [20, 35, 65, 85, 70, 45, 40, 55, 50, 45, 55, 75, 90, 80, 55, 30], // MG Road
-    [15, 30, 55, 70, 55, 40, 35, 45, 40, 35, 45, 65, 75, 70, 45, 25], // Brigade Rd
-    [25, 40, 70, 80, 65, 50, 45, 55, 50, 50, 60, 80, 85, 75, 50, 35], // Residency Rd
-    [10, 20, 40, 50, 40, 30, 25, 35, 30, 25, 35, 50, 55, 50, 35, 20], // Richmond Rd
-    [18, 32, 55, 65, 50, 38, 32, 42, 38, 35, 45, 60, 70, 65, 42, 28], // St Marks Rd
-    [12, 22, 38, 45, 35, 28, 22, 30, 26, 22, 30, 42, 48, 44, 30, 18], // Cunningham Rd
-  ];
+
+  // Guard: don't render if data hasn't arrived yet
+  if (!intensityData || intensityData.length === 0 || !segments || segments.length === 0) {
+    return (
+      <div className={`flex items-center justify-center text-sm text-muted-foreground ${fullSize ? "h-[200px]" : "h-[150px]"}`}>
+        No heatmap data available yet.
+      </div>
+    );
+  }
 
   const getColor = (intensity: number) => {
     if (intensity > 75) return "bg-destructive";
@@ -48,13 +48,16 @@ const TrafficHeatmap = ({ fullSize = false }: TrafficHeatmapProps) => {
         </div>
 
         {/* Data rows */}
-        {segments.map((segment, rowIndex) => (
+        {segments.map((segment, rowIndex) => {
+          const rowData = intensityData[rowIndex];
+          if (!rowData) return null;
+          return (
           <div key={segment} className="flex items-center mb-1">
             <div className="w-24 flex-shrink-0 text-xs text-muted-foreground truncate pr-2">
               {segment}
             </div>
             <div className="flex-1 flex gap-0.5">
-              {intensityData[rowIndex].map((intensity, colIndex) => (
+              {rowData.map((intensity, colIndex) => (
                 <div
                   key={colIndex}
                   className={`flex-1 rounded-sm ${getColor(intensity)} transition-all hover:scale-110 cursor-pointer`}
@@ -68,7 +71,8 @@ const TrafficHeatmap = ({ fullSize = false }: TrafficHeatmapProps) => {
               ))}
             </div>
           </div>
-        ))}
+          );
+        })}
 
         {/* Legend */}
         <div className="flex items-center justify-end gap-4 mt-4 pt-3 border-t border-border">
